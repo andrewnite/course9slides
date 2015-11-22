@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mt Cars Dataset Linear Regression Exploration</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Mt Cars Dataset Linear Regression Exploration">
+  <meta name="author" content="Andy Smith">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Mt Cars Dataset Linear Regression Exploration</h1>
+    <h2></h2>
+    <p>Andy Smith<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>About the product</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This product allows for you to visually inspect the data from the standard R package &#39;mtcars&#39; dataset</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Using the product</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The RShiny application allows you to chose which attribute of the dataset you would like to predict on.  It also allows for a number to be input which will produce a &#39;miles per gallon&#39; predication for the entered predictor.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Linear regression using ggplot2</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The following R code is used in the application to generate a scatterplot with regression line.</p>
+
+<pre><code class="r">ggplot(df, aes(x=predictor, y=mpg)) + geom_point(shape=1) + 
+geom_smooth(method=lm) + xlab(&quot;Weight&quot;) + ylab(&quot;Miles per gallon&quot;)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Prediction using linear regression</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The following code snippet will make a prediction on miles per gallon based on an input</p>
+
+<pre><code class="r">value_to_predict_num &lt;- 5
+df &lt;- data.frame(mtcars[&quot;wt&quot;], mpg=mtcars$mpg)
+colnames(df)[1]&lt;-&quot;predictor&quot;
+linear_model &lt;- lm(mpg~predictor, data=df)
+res &lt;- predict(linear_model, data.frame(predictor=value_to_predict_num))
+rounded_result &lt;- round(res[[1]], digits = 2)
+
+paste(&quot;Prediction: Weight of&quot;, value_to_predict_num, 
+      &quot;will result in&quot;,toString(rounded_result), &quot;miles per gallon&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;Prediction: Weight of 5 will result in 10.56 miles per gallon&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='About the product'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Using the product'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Linear regression using ggplot2'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Prediction using linear regression'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
